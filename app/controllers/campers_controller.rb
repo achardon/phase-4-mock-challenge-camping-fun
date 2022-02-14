@@ -15,10 +15,10 @@ class CampersController < ApplicationController
 
     def create
         camper = Camper.create(camper_params)
-        if camper 
+        if camper.valid? 
             render json: camper, status: :created
         else
-            render json: {errors: "validation errors"}, status: :unprocessable_entity
+            render json: {errors: camper.errors.full_messages}, status: :unprocessable_entity
         end
     end
 
